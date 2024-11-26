@@ -1,0 +1,267 @@
+
+proxy-providers:
+  provider1:
+    # 下方url里填入你的订阅
+    url: "https://aapi.xn--efvy9m4r1b7lh.com/link/s5ShlKXhJaQYaYFF?sub=3"
+    type: http
+    interval: 86400
+    health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
+
+proxies: 
+  - name: "直连"
+    type: direct
+    udp: true
+
+mixed-port: 7890
+ipv6: true
+allow-lan: true
+unified-delay: false
+tcp-concurrent: true
+external-controller: 127.0.0.1:9090
+external-ui: ui
+external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+
+find-process-mode: strict
+global-client-fingerprint: chrome
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+
+dns:
+  enable: true
+  ipv6: true
+  respect-rules: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+    - "+.market.xiaomi.com"
+  nameserver:
+    - https://120.53.53.53/dns-query
+    - https://223.5.5.5/dns-query
+  proxy-server-nameserver:
+    - https://120.53.53.53/dns-query
+    - https://223.5.5.5/dns-query
+  nameserver-policy:
+    "rule-set:cn_domain,private_domain":
+      - https://120.53.53.53/dns-query
+      - https://223.5.5.5/dns-query
+    "rule-set:geolocation-!cn":
+      - "https://dns.cloudflare.com/dns-query"
+      - "https://dns.google/dns-query"
+
+proxy-groups:
+
+  - name: 默认
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png"
+    proxies: [自动选择,直连,香港,台湾,日本,新加坡,美国,其它地区,全部节点]
+
+  - name: Google
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png"
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: OpenAI
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bot.png"
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: Telegram
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png"
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: Microsoft
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png"
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: Twitter
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png"
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: YouTube
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png"
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: Whatsapp
+    type: select
+    url: "url: https://web.whatsapp.com/data/manifest.json"
+    icon: "https://static.whatsapp.net/rsrc.php/v3/yP/r/rYZqPCBaG70.png"
+    proxies:  [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: PayPal
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/PayPal.png"
+    proxies:  [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: Line
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Line.png"
+    proxies:  [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: 国内
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png"
+    proxies:  [直连,默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择]
+
+  - name: 其他
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png"
+    proxies:  [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择]
+
+  #分隔,下面是地区分组
+  - name: 香港
+    type: select
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png'
+    include-all: true
+    filter: "(?i)港|hk|hongkong|hong kong"
+
+  - name: 台湾
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png"
+    include-all: true
+    filter: "(?i)台|tw|taiwan"
+
+  - name: 日本
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png"
+    include-all: true
+    filter: "(?i)日|jp|japan"
+
+  - name: 美国
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png"
+    include-all: true
+    filter: "(?i)美|us|unitedstates|united states"
+
+  - name: 新加坡
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png"
+    include-all: true
+    filter: "(?i)(新|sg|singapore)"
+
+  - name: 其它地区
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png"
+    include-all: true
+    filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
+
+  - name: 全部节点
+    type: select
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png"
+    include-all: true
+    filter: "(?i)^(?!.*(?:直连|永久官网|超时|新官网)).*"
+
+  - name: 自动选择
+    type: url-test
+    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png"
+    include-all: true
+    tolerance: 10
+    filter: "(?i)^(?!.*(?:直连|永久官网|超时|新官网)).*"
+
+rules:
+
+  - RULE-SET,twitter_domain,Twitter
+  - RULE-SET,youtube_domain,YouTube
+  - RULE-SET,google_domain,Google
+  - RULE-SET,microsoft,Microsoft
+  - RULE-SET,openai,OpenAI
+  - RULE-SET,telegram_domain,Telegram
+  - RULE-SET,whatsapp,Whatsapp
+  - RULE-SET,paypal,PayPal
+  - RULE-SET,line,Line
+  - RULE-SET,google_ip,Google
+  - RULE-SET,telegram_ip,Telegram
+  - RULE-SET,twitter_ip,Twitter
+  - RULE-SET,geolocation-!cn,其他
+  - RULE-SET,private_ip,直连,no-resolve
+  - RULE-SET,cn_domain,直连
+  - RULE-SET,cn_ip,直连,no-resolve
+  - MATCH,其他
+
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+rule-providers:
+  private_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+  cn_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+  openai:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
+
+  twitter_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
+  youtube_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+  google_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+  telegram_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
+  geolocation-!cn:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+  paypal:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"
+  whatsapp:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.mrs"
+  line:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.mrs"
+  microsoft:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
+  private_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+  cn_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+  google_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+  twitter_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
+  telegram_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
