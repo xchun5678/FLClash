@@ -2,7 +2,7 @@
 proxy-providers:
   provider1:
     # 下方url里填入你的订阅
-    url: "https://aapi.xn--efvy9m4r1b7lh.com/link/s5ShlKXhJaQYaYFF?sub=3"
+    url: "https://aapi.xn--efvy9m4r1b7lh.com/link/aINrT24Hjd7p93ip?sub=3"
     type: http
     interval: 86400
     health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
