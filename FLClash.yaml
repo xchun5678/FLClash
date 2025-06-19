@@ -2,7 +2,7 @@
 proxy-providers:
   provider1:
     # 下方url里填入你的订阅
-    url: "3"
+    url: "http://123.207.61.35:3389/link/qpaGF9R0wsQJh81J?sub=3"
     type: http
     interval: 86400
     health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
